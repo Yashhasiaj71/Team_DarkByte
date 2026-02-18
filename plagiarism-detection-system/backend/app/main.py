@@ -1,4 +1,12 @@
+
+import sys
+import os
+
+# Add parent directory to path to allow running as script
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from fastapi import FastAPI
+
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine, Base
 from app.controllers import students, assignments, submissions
@@ -30,6 +38,11 @@ app.include_router(students.router)
 app.include_router(assignments.router)
 app.include_router(submissions.router)
 
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Plagiarism Detection API"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
