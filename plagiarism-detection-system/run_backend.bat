@@ -1,9 +1,0 @@
-@echo off
-cd backend
-echo Installing Backend Dependencies...
-pip install -r requirements.txt
-echo Seeding Database...
-python seed_data.py
-echo Starting Backend Server...
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-pause
